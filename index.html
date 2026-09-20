@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="mr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>तेच ते आणि तेच ते</title>
+
+    <!-- Google Fonts: IBM Plex Sans & IBM Plex Sans Devanagari -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Devanagari:wght@300;400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"IBM Plex Sans Devanagari"', '"IBM Plex Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            gold: '#f59e0b',
+                            violet: '#8b5cf6',
+                            emerald: '#10b981',
+                            cyan: '#06b6d4',
+                            rose: '#f43f5e'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'IBM Plex Sans Devanagari', 'IBM Plex Sans', sans-serif;
+            text-align: justify;
+            text-justify: inter-word;
+            word-break: normal;
+            overflow-wrap: break-word;
+            hyphens: none;
+            -webkit-hyphens: none;
+            -ms-hyphens: none;
+            line-height: 1.95;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* SVG Custom Animation Keyframes */
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes reverseSpin {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.85;
+            }
+            50% {
+                transform: scale(1.08);
+                opacity: 1;
+            }
+        }
+
+        @keyframes floatOrbit {
+            0% { transform: rotate(0deg) translateX(45px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(45px) rotate(-360deg); }
+        }
+
+        @keyframes breathCore {
+            0%, 100% { r: 14; filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.7)); }
+            50% { r: 17; filter: drop-shadow(0 0 22px rgba(244, 63, 94, 0.9)); }
+        }
+
+        .spin-orbit-1 {
+            animation: spinSlow 32s linear infinite;
+            transform-origin: 200px 200px;
+        }
+
+        .spin-orbit-2 {
+            animation: reverseSpin 24s linear infinite;
+            transform-origin: 200px 200px;
+        }
+
+        .spin-orbit-3 {
+            animation: spinSlow 18s linear infinite;
+            transform-origin: 200px 200px;
+        }
+
+        .core-pulse {
+            animation: pulseGlow 5s ease-in-out infinite;
+            transform-origin: 200px 200px;
+        }
+
+        .orbiting-dot-1 {
+            animation: floatOrbit 8s linear infinite;
+            transform-origin: 200px 200px;
+        }
+
+        /* Distinct Key-word Accent Styling */
+        .kw-ego {
+            color: #dc2626;
+            font-weight: 600;
+            background: linear-gradient(120deg, rgba(239, 68, 68, 0.12) 0%, rgba(244, 63, 94, 0.16) 100%);
+            padding: 0.08em 0.35em;
+            border-radius: 0.375rem;
+            white-space: nowrap;
+        }
+        .dark .kw-ego {
+            color: #f87171;
+            background: linear-gradient(120deg, rgba(239, 68, 68, 0.22) 0%, rgba(244, 63, 94, 0.25) 100%);
+        }
+
+        .kw-cycle {
+            color: #d97706;
+            font-weight: 600;
+            background: linear-gradient(120deg, rgba(245, 158, 11, 0.13) 0%, rgba(251, 191, 36, 0.18) 100%);
+            padding: 0.08em 0.35em;
+            border-radius: 0.375rem;
+            white-space: nowrap;
+        }
+        .dark .kw-cycle {
+            color: #fbbf24;
+            background: linear-gradient(120deg, rgba(245, 158, 11, 0.22) 0%, rgba(251, 191, 36, 0.25) 100%);
+        }
+
+        .kw-perspective {
+            color: #2563eb;
+            font-weight: 600;
+            background: linear-gradient(120deg, rgba(37, 99, 235, 0.12) 0%, rgba(96, 165, 250, 0.18) 100%);
+            padding: 0.08em 0.35em;
+            border-radius: 0.375rem;
+            white-space: nowrap;
+        }
+        .dark .kw-perspective {
+            color: #60a5fa;
+            background: linear-gradient(120deg, rgba(37, 99, 235, 0.22) 0%, rgba(96, 165, 250, 0.25) 100%);
+        }
+
+        .kw-neutral {
+            color: #059669;
+            font-weight: 600;
+            background: linear-gradient(120deg, rgba(16, 185, 129, 0.13) 0%, rgba(52, 211, 153, 0.18) 100%);
+            padding: 0.08em 0.35em;
+            border-radius: 0.375rem;
+        }
+        .dark .kw-neutral {
+            color: #34d399;
+            background: linear-gradient(120deg, rgba(16, 185, 129, 0.22) 0%, rgba(52, 211, 153, 0.25) 100%);
+        }
+
+        .kw-calibrate {
+            color: #7c3aed;
+            font-weight: 600;
+            background: linear-gradient(120deg, rgba(124, 58, 237, 0.12) 0%, rgba(167, 139, 250, 0.18) 100%);
+            padding: 0.08em 0.35em;
+            border-radius: 0.375rem;
+        }
+        .dark .kw-calibrate {
+            color: #a78bfa;
+            background: linear-gradient(120deg, rgba(124, 58, 237, 0.22) 0%, rgba(167, 139, 250, 0.25) 100%);
+        }
+
+        .kw-relativity {
+            color: #0284c7;
+            font-weight: 600;
+            background: linear-gradient(120deg, rgba(2, 132, 199, 0.12) 0%, rgba(56, 189, 248, 0.18) 100%);
+            padding: 0.08em 0.35em;
+            border-radius: 0.375rem;
+        }
+        .dark .kw-relativity {
+            color: #38bdf8;
+            background: linear-gradient(120deg, rgba(2, 132, 199, 0.22) 0%, rgba(56, 189, 248, 0.25) 100%);
+        }
+
+        .kw-truth {
+            background: linear-gradient(135deg, #d97706, #ec4899, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            display: inline-block;
+        }
+        .dark .kw-truth {
+            background: linear-gradient(135deg, #fbbf24, #f43f5e, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Subtle drop cap for first paragraph */
+        .first-letter-highlight::first-letter {
+            font-size: 2.2em;
+            float: left;
+            margin-right: 0.18em;
+            line-height: 0.95;
+            font-weight: 700;
+            color: #f59e0b;
+        }
+    </style>
+</head>
+
+<body class="bg-neutral-50 text-neutral-800 dark:bg-[#0c0f17] dark:text-neutral-200 antialiased min-h-screen selection:bg-amber-400/30 selection:text-amber-900 dark:selection:text-amber-200 py-6 sm:py-12 px-4 sm:px-6 md:px-8">
+
+    <div class="max-w-3xl mx-auto flex items-center justify-end gap-3 mb-6 sm:mb-10">
+        <!-- Share Button -->
+        <button id="shareBtn" aria-label="Share article" class="flex items-center gap-2 px-3.5 py-2 rounded-full border border-neutral-300 dark:border-neutral-700/80 bg-white/80 dark:bg-neutral-900/80 backdrop-blur text-neutral-700 dark:text-neutral-300 hover:text-amber-600 dark:hover:text-amber-400 hover:border-amber-400 dark:hover:border-amber-500/50 shadow-sm transition-all duration-200 active:scale-95 text-sm font-medium">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+            <span class="text-xs sm:text-sm font-normal">Share</span>
+        </button>
+
+        <!-- Theme Toggle Button -->
+        <button id="themeToggleBtn" aria-label="Toggle light and dark mode" class="p-2 sm:px-3 sm:py-2 flex items-center gap-2 rounded-full border border-neutral-300 dark:border-neutral-700/80 bg-white/80 dark:bg-neutral-900/80 backdrop-blur text-neutral-700 dark:text-neutral-300 hover:text-amber-600 dark:hover:text-amber-400 hover:border-amber-400 dark:hover:border-amber-500/50 shadow-sm transition-all duration-200 active:scale-95">
+            <!-- Sun Icon (shown in dark mode) -->
+            <svg id="sunIcon" class="w-4 h-4 hidden dark:block text-amber-400" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <!-- Moon Icon (shown in light mode) -->
+            <svg id="moonIcon" class="w-4 h-4 block dark:hidden text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <main class="max-w-3xl mx-auto bg-white/90 dark:bg-[#121622]/95 border border-neutral-200/80 dark:border-neutral-800/80 rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-12 shadow-xl shadow-neutral-200/40 dark:shadow-black/60 backdrop-blur-sm transition-all duration-300">
+
+        <!-- Title -->
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-center mb-8 sm:mb-10 bg-gradient-to-r from-amber-600 via-rose-500 to-violet-600 dark:from-amber-400 dark:via-rose-400 dark:to-violet-400 bg-clip-text text-transparent">
+            तेच ते आणि तेच ते
+        </h1>
+
+        <!-- Animated Colorful SVG: The Cosmic Orbit of Perspective & Self -->
+        <div class="my-6 sm:my-8 flex justify-center items-center">
+            <svg viewBox="0 0 400 400" class="w-full max-w-[280px] sm:max-w-[340px] h-auto overflow-visible select-none drop-shadow-lg" aria-hidden="true">
+                <defs>
+                    <!-- Background ambient glow -->
+                    <radialGradient id="bgCosmicGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.35"/>
+                        <stop offset="50%" stop-color="#06b6d4" stop-opacity="0.15"/>
+                        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+                    </radialGradient>
+
+                    <!-- Core Singularity / Ego Gradient -->
+                    <radialGradient id="coreEgoGrad" cx="35%" cy="35%" r="65%">
+                        <stop offset="0%" stop-color="#fbbf24"/>
+                        <stop offset="45%" stop-color="#f43f5e"/>
+                        <stop offset="100%" stop-color="#7c3aed"/>
+                    </radialGradient>
+
+                    <!-- Ring Gradients -->
+                    <linearGradient id="ringGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#f59e0b"/>
+                        <stop offset="50%" stop-color="#ec4899"/>
+                        <stop offset="100%" stop-color="#8b5cf6"/>
+                    </linearGradient>
+
+                    <linearGradient id="ringGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#06b6d4"/>
+                        <stop offset="50%" stop-color="#3b82f6"/>
+                        <stop offset="100%" stop-color="#10b981"/>
+                    </linearGradient>
+
+                    <linearGradient id="ringGrad3" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#a855f7"/>
+                        <stop offset="100%" stop-color="#38bdf8"/>
+                    </linearGradient>
+
+                    <!-- Filter for dreamlike glow -->
+                    <filter id="celestialGlow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="3.5" result="blur"/>
+                        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                    </filter>
+                </defs>
+
+                <!-- Soft Glow Backdrop -->
+                <circle cx="200" cy="200" r="160" fill="url(#bgCosmicGlow)" />
+
+                <!-- Deep Universe Reference Geometry (Sacred Relativity Triangles & Hexagon) -->
+                <polygon points="200,60 321,130 321,270 200,340 79,270 79,130"
+                         fill="none" stroke="#6366f1" stroke-opacity="0.22" stroke-width="1.2" stroke-dasharray="4 6"/>
+                <polygon points="200,80 304,260 96,260"
+                         fill="none" stroke="#ec4899" stroke-opacity="0.18" stroke-width="1" stroke-dasharray="3 5"/>
+
+                <!-- Outer Orbit (Relative Universe / Frame of Reality) -->
+                <g class="spin-orbit-1">
+                    <circle cx="200" cy="200" r="135" fill="none" stroke="url(#ringGrad1)" stroke-width="2.5" stroke-dasharray="14 10 32 10" stroke-linecap="round" opacity="0.85"/>
+                    <circle cx="335" cy="200" r="6" fill="#f59e0b" filter="url(#celestialGlow)"/>
+                    <circle cx="65" cy="200" r="4.5" fill="#ec4899" filter="url(#celestialGlow)"/>
+                </g>
+
+                <!-- Middle Orbit (Cognitive Observation & Point of View) -->
+                <g class="spin-orbit-2">
+                    <ellipse cx="200" cy="200" rx="100" ry="62" fill="none" stroke="url(#ringGrad2)" stroke-width="2" stroke-dasharray="18 8 8 8" opacity="0.9"/>
+                    <ellipse cx="200" cy="200" rx="62" ry="100" fill="none" stroke="url(#ringGrad3)" stroke-width="1.5" stroke-dasharray="10 12" opacity="0.6"/>
+                    <circle cx="200" cy="138" r="5" fill="#06b6d4" filter="url(#celestialGlow)"/>
+                    <circle cx="200" cy="262" r="5" fill="#10b981" filter="url(#celestialGlow)"/>
+                </g>
+
+                <!-- Inner Orbit ("तेच ते" Circular Pattern / Egoic cycle) -->
+                <g class="spin-orbit-3">
+                    <circle cx="200" cy="200" r="52" fill="none" stroke="url(#ringGrad1)" stroke-width="2.2" stroke-dasharray="8 6" opacity="0.95"/>
+                    <circle cx="245" cy="200" r="4" fill="#f43f5e" class="orbiting-dot-1"/>
+                </g>
+
+                <!-- Observer Mind / Cosmic Eye & Center ("आत आणि बाहेर") -->
+                <g class="core-pulse">
+                    <circle cx="200" cy="200" r="32" fill="#8b5cf6" fill-opacity="0.2"/>
+                    <circle cx="200" cy="200" r="22" fill="#ec4899" fill-opacity="0.3"/>
+                    <circle cx="200" cy="200" r="14" fill="url(#coreEgoGrad)" filter="url(#celestialGlow)"/>
+                    <!-- Lens light reflections -->
+                    <circle cx="196" cy="196" r="3.5" fill="#ffffff" opacity="0.95"/>
+                    <circle cx="204" cy="203" r="1.5" fill="#ffffff" opacity="0.75"/>
+                </g>
+
+                <!-- Ray lines denoting expanding perception (त्रयस्थ व तटस्थ नजर) -->
+                <line x1="200" y1="200" x2="310" y2="90" stroke="url(#ringGrad2)" stroke-width="1.2" stroke-dasharray="2 4" opacity="0.5"/>
+                <line x1="200" y1="200" x2="90" y2="310" stroke="url(#ringGrad2)" stroke-width="1.2" stroke-dasharray="2 4" opacity="0.5"/>
+                <line x1="200" y1="200" x2="90" y2="90" stroke="url(#ringGrad1)" stroke-width="1.2" stroke-dasharray="2 4" opacity="0.5"/>
+                <line x1="200" y1="200" x2="310" y2="310" stroke="url(#ringGrad1)" stroke-width="1.2" stroke-dasharray="2 4" opacity="0.5"/>
+            </svg>
+        </div>
+
+        <div class="space-y-6 sm:space-y-7 text-base sm:text-lg text-neutral-700 dark:text-neutral-300 font-normal">
+
+            <!-- Paragraph 1 -->
+            <p class="first-letter-highlight">
+                आपल्या आजूबाजूस घडणाऱ्या घटना; संपर्कात येणाऱ्या व्यक्ती, मैत्र, आप्तस्वकीय, प्राणी, पक्षी आणि निर्जीव वस्तू यांच्या ‘वर्तणुकी’कडे आपण सहसा एकाच कोनातून म्हणजे <span class="kw-perspective">‘आपल्याच’ दृष्टीकोनातून</span> बघत असतो. जगाकडे पाहण्याचा, त्याला समजून घेण्याचा हाच काय तो एकमेव मार्ग आहे ही आपली ठाम समजूत असते. झाल्या-गेल्या घटनांवर विचार आणि त्यांना आपण दिलेल्या प्रतिक्रिया व प्रतिसाद यांचा उगम देखील याच दृष्टीकोनातून होत असतो. अर्थातच त्यावर आपल्या <span class="kw-ego">अहंकाराचा</span> पगडा असणे ओघाने आलेच. त्यामुळे मानापमान, समज-गैरसमज, विश्वास-अविश्वास निर्माण होत असतात, मानसिक अस्वास्थ्य निर्माण करत असतात. आणि हा <span class="kw-ego">अहंकारच</span> आपला दृष्टिकोन अधिकाधिक घट्ट करत असतो.
+            </p>
+
+            <!-- Paragraph 2 -->
+            <p>
+                आता गंमत अशी आहे की हे वरचे सर्व वर्णन बहुतेक वेळा प्रत्येकाच्या बाबतीत थोड्याबहुत फरकाने <span class="kw-cycle">‘तेच ते’</span> असते. म्हणजे या विश्वातले सगळेच जण बाह्य जगाकडे तसेच, म्हणजे स्वतःच्या दृष्टिकोनातूनच बघत असतात.
+            </p>
+
+            <!-- Paragraph 3 -->
+            <p>
+                जोपर्यंत काही वेगळा <span class="kw-perspective">‘विचारकोन’</span> अंगिकारला जात नाही तोपर्यंत जो-तो त्याच-त्या चक्रात गुरफटून आयुष्य कंठीत असतो - <span class="kw-cycle">तेच ते आणि तेच ते</span>.
+            </p>
+
+            <!-- Paragraph 4 -->
+            <p class="font-medium text-amber-700 dark:text-amber-300">
+                काय करायचे मग या ‘त्याच त्या’ चक्रातून बाहेर पडायला?
+            </p>
+
+            <!-- Paragraph 5 -->
+            <p>
+                तसे फार अवघड नाहीये. सर्वप्रथम त्यासाठी जाणीवपूर्वक हे समजून घ्यायचे की आपण जे पाहतो, अनुभवतो आणि त्यावरून निष्कर्ष काढून जे काही ‘समजतो’, ते आणि तेच प्रत्येक वेळेस बरोबर असते असे नाही. जेंव्हा कोणी आपल्याला हवे तसे वागत नाही, आपल्या मनाजोगते काही घडत नाही तेंव्हा ते तसे न होण्यासाठी एक किंवा अनेक कारणे असू शकतात आणि ती <span class="kw-neutral">perfectly valid</span> असू शकतात हे मान्य करायचे.
+            </p>
+
+            <!-- Paragraph 6 -->
+            <p>
+                थोडक्यात काय तर प्रयत्नपूर्वक आपल्या स्वतःतून जरा बाहेर येऊन <span class="kw-neutral">‘त्रयस्थ आणि तटस्थ नजरेने’</span> वस्तुस्थितीकडे पाहण्याची हळू हळू सवय लावायची स्वतःला. आधी कठीण वाटले तरी सवयीने जमू लागते आणि मग काही एक वेगळेच दृष्य दिसू लागते. “नक्की काय” हे कळू लागते. <span class="kw-relativity">Facts and realities identify</span> होऊ लागतात.
+            </p>
+
+            <!-- Paragraph 7 -->
+            <p>
+                रोजच्या व्यवहारात आपल्या point of view व्यतिरिक्त असलेल्या इतर बाजू थोडया थोडया समजून घेता येऊ लागल्या की त्याचा कळत नकळत एक फायदा असा होऊ लागतो की समोर येणाऱ्या परिस्थितीस दिला जाणारा आपला प्रतिसाद आपसूक <span class="kw-calibrate">calibrated, fine tuned</span> and most importantly, <span class="kw-calibrate">if required</span> होतो. त्यामुळे अनावश्यक ताणतणाव निर्माण होणे टळते. आपण नकळत relative frame of mind मधून बाहेर पडून <span class="kw-relativity">relative frame of reality</span> मधे प्रवेश करतो. शब्दांत न मांडता येणारी अनुभूती येते.
+            </p>
+
+            <!-- Paragraph 8 -->
+            <p>
+                या अफाट विश्वातील आकाशगंगा, ग्रह, तारे हे सर्व आपल्याला जसे दिसतात किंवा जाणवतात ते तसे का? हे समजून घेण्याचा प्रयत्न करताना विश्वविख्यात शास्त्रज्ञ डॉ अल्बर्ट आईन्स्टाईन यांनी मांडलेला <span class="kw-relativity">‘सापेक्षतावादाचा सिद्धांत’ (theory of relativity)</span> समजायला तसा गहन असला तरी त्याचा निष्कर्ष आहे की “जे काही दिसते किंवा जाणवते ते तसे असतेच असे नाही. सर्व काही <span class="kw-perspective">दृष्टीकोनसापेक्ष</span> असते”. म्हणजे तर्काच्या कसोटीवर तावून सुलाखून घेतलेला वैज्ञानिक सिद्धान्त देखील शेवटी काही वेगळे सांगत नाही; आणि प्रत्येकच माणसाचे ‘मन’ डोळ्यांना दिसत नसले तरी बाह्य विश्वापेक्षा काही कमी अफाट नाहीये.
+            </p>
+
+            <!-- Paragraph 9 -->
+            <p class="text-lg sm:text-xl font-semibold tracking-wide">
+                <span class="kw-truth">जे बाहेर आहे तेच आतही आहे.</span>
+            </p>
+
+            <!-- Paragraph 10 -->
+            <p class="text-xl sm:text-2xl font-bold text-amber-600 dark:text-amber-400">
+                तेच ते आणि तेच ते!
+            </p>
+
+            <!-- Author & Date -->
+            <div class="pt-6 sm:pt-8 text-right font-medium text-neutral-500 dark:text-neutral-400 text-base sm:text-lg tracking-normal">
+                ~जयदीप | ५ सप्टेंबर २०२४
+            </div>
+
+        </div>
+
+    </main>
+
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-4 py-2.5 rounded-full bg-neutral-900/90 dark:bg-neutral-100/90 text-white dark:text-neutral-900 text-sm font-medium shadow-2xl backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 transform translate-y-3 z-50 flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400 dark:text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span id="toastMsg">लिंक कॉपी केली गेली आहे!</span>
+    </div>
+
+    <script>
+        // Theme initialization and toggle logic
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const htmlElement = document.documentElement;
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                htmlElement.classList.add('dark');
+            } else {
+                htmlElement.classList.remove('dark');
+            }
+        }
+
+        // Initialize Theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            applyTheme(savedTheme === 'dark');
+        } else {
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(systemPrefersDark);
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isCurrentlyDark = htmlElement.classList.contains('dark');
+            const targetDark = !isCurrentlyDark;
+            applyTheme(targetDark);
+            localStorage.setItem('theme', targetDark ? 'dark' : 'light');
+        });
+
+        // Toast Helper
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMsg');
+        let toastTimeout = null;
+
+        function showToast(message) {
+            toastMsg.textContent = message;
+            toast.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            if (toastTimeout) clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
+            }, 3000);
+        }
+
+        // Share Feature (Web Share API with Clipboard Fallback)
+        const shareBtn = document.getElementById('shareBtn');
+        shareBtn.addEventListener('click', async () => {
+            const shareData = {
+                title: 'तेच ते आणि तेच ते',
+                text: 'तेच ते आणि तेच ते — ~जयदीप',
+                url: window.location.href
+            };
+
+            if (navigator.share && window.isSecureContext) {
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    if (err.name !== 'AbortError') {
+                        fallbackCopy();
+                    }
+                }
+            } else {
+                fallbackCopy();
+            }
+        });
+
+        function fallbackCopy() {
+            try {
+                const dummyInput = document.createElement('input');
+                dummyInput.value = window.location.href;
+                document.body.appendChild(dummyInput);
+                dummyInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(dummyInput);
+                showToast('लिंक क्लिपबोर्डवर कॉपी केली!');
+            } catch (e) {
+                showToast('लिंक कॉपी करता आली नाही');
+            }
+        }
+    </script>
+</body>
+</html>
