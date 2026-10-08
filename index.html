@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>तेच ते आणि तेच ते</title>
   
-  <!-- IBM Plex Sans and IBM Plex Sans Devanagari via Google Fonts -->
+  <!-- IBM Plex Sans & IBM Plex Sans Devanagari Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Devanagari:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Devanagari:wght@300;400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -18,19 +18,14 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"IBM Plex Sans Devanagari"', '"IBM Plex Sans"', 'sans-serif'],
+            marathi: ['"IBM Plex Sans Devanagari"', '"IBM Plex Sans"', 'sans-serif'],
           },
           colors: {
-            cream: {
-              50: '#fdfbf7',
-              100: '#fbf9f4',
-              200: '#f4ede2',
-              300: '#e8dcce',
-            },
-            slateDark: {
-              850: '#141a24',
-              900: '#0f141c',
-              950: '#090d13',
+            brand: {
+              cream: '#FAF8F5',
+              darkbg: '#121417',
+              cardLight: '#FFFFFF',
+              cardDark: '#1A1D23',
             }
           }
         }
@@ -39,285 +34,302 @@
   </script>
 
   <style>
-    /* Ensure typography follows IBM Plex Sans family and prevents broken words */
     body {
       font-family: 'IBM Plex Sans Devanagari', 'IBM Plex Sans', sans-serif;
-      text-rendering: optimizeLegibility;
+      word-break: keep-all;
+      overflow-wrap: normal;
+      hyphens: none;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    /* Paragraph typography rules as instructed: justified body, unbreakable Marathi words */
-    .marathi-body {
+    .article-text {
       text-align: justify;
-      hyphens: none;
-      -webkit-hyphens: none;
+      text-justify: inter-word;
       word-break: keep-all;
       overflow-wrap: break-word;
       line-height: 1.95;
     }
 
-    @media (max-width: 640px) {
-      .marathi-body {
-        line-height: 1.85;
-      }
+    /* Keyframe animations for the SVG header graphic */
+    @keyframes spin-slow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
-
-    /* Animated SVG keyframes for subtle multi-orbit loops reflecting shifting viewpoints */
-    @keyframes spinClockwise {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    @keyframes spin-reverse {
+      0% { transform: rotate(360deg); }
+      100% { transform: rotate(0deg); }
     }
-
-    @keyframes spinCounterClockwise {
-      from { transform: rotate(360deg); }
-      to { transform: rotate(0deg); }
-    }
-
-    @keyframes pulseAura {
+    @keyframes pulse-subtle {
       0%, 100% { transform: scale(1); opacity: 0.85; }
-      50% { transform: scale(1.08); opacity: 1; }
+      50% { transform: scale(1.06); opacity: 1; }
+    }
+    @keyframes float-gentle {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
     }
 
-    .orbit-cw {
-      transform-origin: 150px 150px;
-      animation: spinClockwise 26s linear infinite;
+    .anim-spin-slow {
+      transform-origin: center;
+      animation: spin-slow 24s linear infinite;
     }
-
-    .orbit-ccw {
-      transform-origin: 150px 150px;
-      animation: spinCounterClockwise 34s linear infinite;
+    .anim-spin-reverse {
+      transform-origin: center;
+      animation: spin-reverse 32s linear infinite;
     }
-
-    .orbit-slow {
-      transform-origin: 150px 150px;
-      animation: spinClockwise 45s linear infinite;
+    .anim-pulse {
+      transform-origin: center;
+      animation: pulse-subtle 6s ease-in-out infinite;
     }
-
-    .center-aura {
-      transform-origin: 150px 150px;
-      animation: pulseAura 6s ease-in-out infinite;
+    .anim-float {
+      animation: float-gentle 5s ease-in-out infinite;
     }
   </style>
 </head>
-<body class="bg-cream-100 text-stone-800 dark:bg-slateDark-900 dark:text-stone-200 transition-colors duration-300 min-h-screen selection:bg-amber-200 dark:selection:bg-amber-900/60 flex flex-col justify-between">
+<body class="bg-[#FAF8F5] text-stone-800 dark:bg-[#121417] dark:text-stone-200 min-h-screen selection:bg-amber-200 dark:selection:bg-amber-900 selection:text-stone-900">
 
-  <header class="w-full max-w-3xl mx-auto px-5 pt-6 pb-2 sm:px-8 flex justify-end items-center gap-2.5">
-    <!-- Share Button -->
-    <button id="shareBtn" aria-label="Share article" class="inline-flex items-center justify-center p-2.5 rounded-full text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100 bg-stone-200/60 dark:bg-stone-800/70 hover:bg-stone-200 dark:hover:bg-stone-700/80 transition-all focus:outline-none focus:ring-2 focus:ring-amber-500/40 cursor-pointer">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="18" cy="5" r="3"></circle>
-        <circle cx="6" cy="12" r="3"></circle>
-        <circle cx="18" cy="19" r="3"></circle>
-        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+  <!-- Top bar with theme toggle -->
+  <header class="w-full max-w-3xl mx-auto px-6 pt-6 pb-2 flex justify-end items-center">
+    <button id="themeToggleBtn" aria-label="Toggle Theme" class="flex items-center gap-2 px-3 py-2 rounded-full border border-stone-200 dark:border-stone-700 bg-white/70 dark:bg-stone-800/80 backdrop-blur-sm shadow-sm hover:shadow transition-all text-sm font-medium text-stone-700 dark:text-stone-200">
+      <!-- Sun Icon (shown in dark mode) -->
+      <svg id="sunIcon" class="w-4 h-4 hidden dark:inline-block text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
       </svg>
-    </button>
-
-    <!-- Theme Toggle Button -->
-    <button id="themeToggleBtn" aria-label="Toggle theme" class="inline-flex items-center justify-center p-2.5 rounded-full text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100 bg-stone-200/60 dark:bg-stone-800/70 hover:bg-stone-200 dark:hover:bg-stone-700/80 transition-all focus:outline-none focus:ring-2 focus:ring-amber-500/40 cursor-pointer">
-      <!-- Sun icon (shown in dark mode) -->
-      <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="4"></circle>
-        <path d="M12 2v2"></path>
-        <path d="M12 20v2"></path>
-        <path d="m4.93 4.93 1.41 1.41"></path>
-        <path d="m17.66 17.66 1.41 1.41"></path>
-        <path d="M2 12h2"></path>
-        <path d="M20 12h2"></path>
-        <path d="m6.34 17.66-1.41 1.41"></path>
-        <path d="m19.07 4.93-1.41 1.41"></path>
+      <!-- Moon Icon (shown in light mode) -->
+      <svg id="moonIcon" class="w-4 h-4 inline-block dark:hidden text-stone-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
       </svg>
-      <!-- Moon icon (shown in light mode) -->
-      <svg id="moonIcon" class="w-5 h-5 block" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-      </svg>
+      <span id="themeToggleText" class="text-xs tracking-wide">थीम</span>
     </button>
   </header>
 
-  <main class="w-full max-w-3xl mx-auto px-5 sm:px-8 py-4 sm:py-8 flex-grow">
-    <!-- Light colorful animated SVG graphic depicting cycles and shifting perspectives -->
-    <div class="flex justify-center mb-6">
-      <svg class="w-40 h-40 sm:w-48 sm:h-48 drop-shadow-sm select-none" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <main class="w-full max-w-2xl mx-auto px-5 sm:px-8 py-6">
+    
+    <!-- Animated Light Colorful SVG Graphic symbolizing cyclical perception / viewpoints -->
+    <div class="flex justify-center items-center my-4 anim-float" aria-hidden="true">
+      <svg class="w-48 h-48 sm:w-56 sm:h-56 drop-shadow-sm" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.8" />
-            <stop offset="50%" stop-color="#ec4899" stop-opacity="0.75" />
-            <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.8" />
+          <linearGradient id="orbitGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.9" />
+            <stop offset="50%" stop-color="#EC4899" stop-opacity="0.85" />
+            <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.9" />
           </linearGradient>
-          <linearGradient id="grad2" x1="100%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.8" />
-            <stop offset="50%" stop-color="#3b82f6" stop-opacity="0.75" />
-            <stop offset="100%" stop-color="#10b981" stop-opacity="0.7" />
+          <linearGradient id="orbitGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.85" />
+            <stop offset="50%" stop-color="#34D399" stop-opacity="0.8" />
+            <stop offset="100%" stop-color="#FBBF24" stop-opacity="0.85" />
           </linearGradient>
-          <linearGradient id="grad3" x1="50%" y1="0%" x2="50%" y2="100%">
-            <stop offset="0%" stop-color="#fb7185" stop-opacity="0.7" />
-            <stop offset="100%" stop-color="#fbbf24" stop-opacity="0.8" />
-          </linearGradient>
-          <radialGradient id="centerCore" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.9" />
-            <stop offset="60%" stop-color="#f43f5e" stop-opacity="0.6" />
-            <stop offset="100%" stop-color="#a855f7" stop-opacity="0" />
+          <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FDE68A" stop-opacity="0.95" />
+            <stop offset="60%" stop-color="#F472B6" stop-opacity="0.5" />
+            <stop offset="100%" stop-color="#60A5FA" stop-opacity="0" />
+          </radialGradient>
+          <radialGradient id="ringGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="70%" stop-color="#FFFFFF" stop-opacity="0" />
+            <stop offset="100%" stop-color="#EC4899" stop-opacity="0.15" />
           </radialGradient>
         </defs>
 
-        <!-- Dynamic cyclical rings representing perspective orbits -->
-        <g class="orbit-cw">
-          <ellipse cx="150" cy="150" rx="116" ry="60" stroke="url(#grad1)" stroke-width="2.5" stroke-dasharray="8 6" opacity="0.85" transform="rotate(-25 150 150)" />
-          <circle cx="266" cy="150" r="5" fill="#ec4899" />
-          <circle cx="34" cy="150" r="4.5" fill="#f59e0b" />
-        </g>
-        
-        <g class="orbit-ccw">
-          <ellipse cx="150" cy="150" rx="116" ry="60" stroke="url(#grad2)" stroke-width="2.5" stroke-dasharray="10 5" opacity="0.85" transform="rotate(35 150 150)" />
-          <circle cx="150" cy="90" r="5.5" fill="#06b6d4" />
-          <circle cx="150" cy="210" r="4" fill="#10b981" />
+        <!-- Background ambient glow -->
+        <circle cx="150" cy="150" r="130" fill="url(#centerGlow)" opacity="0.35" class="anim-pulse" />
+
+        <!-- Outer Rotating Cyclical Ring (The repetitive loop) -->
+        <g class="anim-spin-slow">
+          <circle cx="150" cy="150" r="110" stroke="url(#orbitGrad1)" stroke-width="2.5" stroke-dasharray="16 12 4 12" stroke-linecap="round" />
+          <circle cx="150" cy="40" r="5" fill="#EC4899" />
+          <circle cx="260" cy="150" r="4.5" fill="#8B5CF6" />
+          <circle cx="150" cy="260" r="5" fill="#F59E0B" />
+          <circle cx="40" cy="150" r="4.5" fill="#06B6D4" />
         </g>
 
-        <g class="orbit-slow">
-          <ellipse cx="150" cy="150" rx="124" ry="74" stroke="url(#grad3)" stroke-width="2" stroke-dasharray="6 7" opacity="0.6" transform="rotate(95 150 150)" />
-          <circle cx="274" cy="150" r="4" fill="#fb7185" />
-          <circle cx="26" cy="150" r="4" fill="#fbbf24" />
+        <!-- Middle Counter-Rotating Perspective Ring -->
+        <g class="anim-spin-reverse">
+          <ellipse cx="150" cy="150" rx="85" ry="55" stroke="url(#orbitGrad2)" stroke-width="2" stroke-dasharray="8 8" stroke-linecap="round" transform="rotate(45 150 150)" />
+          <ellipse cx="150" cy="150" rx="85" ry="55" stroke="url(#orbitGrad1)" stroke-width="2" stroke-dasharray="8 8" stroke-linecap="round" transform="rotate(-45 150 150)" />
+          <circle cx="205" cy="95" r="4" fill="#38BDF8" />
+          <circle cx="95" cy="205" r="4" fill="#34D399" />
         </g>
 
-        <!-- Central perspective core -->
-        <circle class="center-aura" cx="150" cy="150" r="32" fill="url(#centerCore)" />
-        <circle cx="150" cy="150" r="14" fill="#ffffff" fill-opacity="0.8" class="dark:fill-stone-100" />
-        <circle cx="150" cy="150" r="6" fill="#f59e0b" />
+        <!-- Inner Point of View / Core Consciousness -->
+        <g class="anim-pulse">
+          <circle cx="150" cy="150" r="32" fill="url(#centerGlow)" />
+          <circle cx="150" cy="150" r="22" stroke="url(#orbitGrad1)" stroke-width="2" />
+          <circle cx="150" cy="150" r="8" fill="#F59E0B" />
+          <!-- Ray points depicting multifaceted view angles -->
+          <line x1="150" y1="118" x2="150" y2="124" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" />
+          <line x1="150" y1="176" x2="150" y2="182" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" />
+          <line x1="118" y1="150" x2="124" y2="150" stroke="#EC4899" stroke-width="2" stroke-linecap="round" />
+          <line x1="176" y1="150" x2="182" y2="150" stroke="#EC4899" stroke-width="2" stroke-linecap="round" />
+        </g>
       </svg>
     </div>
 
-    <!-- Title (Centered) -->
-    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center tracking-normal text-stone-900 dark:text-stone-100 mb-8 sm:mb-10">
+    <!-- Document Title -->
+    <h1 class="text-3xl sm:text-4xl font-bold text-center tracking-normal text-stone-900 dark:text-stone-50 mt-2 mb-10 leading-snug">
       तेच ते आणि तेच ते
     </h1>
 
-    <article class="space-y-5 sm:space-y-6 text-[1.04rem] sm:text-[1.125rem] font-normal text-stone-800 dark:text-stone-200">
-      <p class="marathi-body">
+    <!-- Article Content Container -->
+    <article class="space-y-6 text-[1.07rem] sm:text-[1.125rem] text-stone-800 dark:text-stone-200">
+
+      <p class="article-text">
         आपल्या आजूबाजूस घडणाऱ्या घटना; संपर्कात येणाऱ्या व्यक्ती, मैत्र, आप्तस्वकीय, प्राणी, पक्षी आणि निर्जीव वस्तू यांच्या ‘वर्तणुकी’कडे आपण सहसा एकाच कोनातून म्हणजे ‘आपल्याच’ दृष्टीकोनातून बघत असतो. जगाकडे पाहण्याचा, त्याला समजून घेण्याचा हाच काय तो एकमेव मार्ग आहे ही आपली ठाम समजूत असते. झाल्या-गेल्या घटनांवर विचार आणि त्यांना आपण दिलेल्या प्रतिक्रिया व प्रतिसाद यांचा उगम देखील याच दृष्टीकोनातून होत असतो. अर्थातच त्यावर आपल्या अहंकाराचा पगडा असणे ओघाने आलेच. त्यामुळे मानापमान, समज-गैरसमज, विश्वास-अविश्वास निर्माण होत असतात, मानसिक अस्वास्थ्य निर्माण करत असतात. आणि हा अहंकारच आपला दृष्टिकोन अधिकाधिक घट्ट करत असतो.
       </p>
 
-      <p class="marathi-body">
+      <p class="article-text">
         आता गंमत अशी आहे की हे वरचे सर्व वर्णन बहुतेक वेळा प्रत्येकाच्या बाबतीत थोड्याबहुत फरकाने ‘तेच ते’ असते. म्हणजे या विश्वातले सगळेच जण बाह्य जगाकडे तसेच, म्हणजे स्वतःच्या दृष्टिकोनातूनच बघत असतात.
       </p>
 
-      <p class="marathi-body">
+      <p class="article-text">
         जोपर्यंत काही वेगळा ‘विचारकोन’ अंगिकारला जात नाही तोपर्यंत जो-तो त्याच-त्या चक्रात गुरफटून आयुष्य कंठीत असतो - तेच ते आणि तेच ते.
       </p>
 
-      <p class="marathi-body">
+      <!-- Divider Symbol -->
+      <div class="text-center text-lg tracking-widest text-stone-400 dark:text-stone-500 py-3 select-none">
+        ⌘⌘⌘
+      </div>
+
+      <!-- Centered Reflection Question -->
+      <p class="text-center font-medium text-lg sm:text-xl text-stone-900 dark:text-stone-100 py-2">
         काय करायचे मग या ‘त्याच त्या’ चक्रातून बाहेर पडायला?
       </p>
 
-      <p class="marathi-body">
+      <!-- Divider Symbol -->
+      <div class="text-center text-lg tracking-widest text-stone-400 dark:text-stone-500 py-3 select-none">
+        ⌘⌘⌘
+      </div>
+
+      <p class="article-text">
         तसे फार अवघड नाहीये. सर्वप्रथम त्यासाठी जाणीवपूर्वक हे समजून घ्यायचे की आपण जे पाहतो, अनुभवतो आणि त्यावरून निष्कर्ष काढून जे काही ‘समजतो’, ते आणि तेच प्रत्येक वेळेस बरोबर असते असे नाही. जेंव्हा कोणी आपल्याला हवे तसे वागत नाही, आपल्या मनाजोगते काही घडत नाही तेंव्हा ते तसे न होण्यासाठी एक किंवा अनेक कारणे असू शकतात आणि ती perfectly valid असू शकतात हे मान्य करायचे.
       </p>
 
-      <p class="marathi-body">
+      <p class="article-text">
         थोडक्यात काय तर प्रयत्नपूर्वक आपल्या स्वतःतून जरा बाहेर येऊन ‘त्रयस्थ आणि तटस्थ नजरेने’ वस्तुस्थितीकडे पाहण्याची हळू हळू सवय लावायची स्वतःला. आधी कठीण वाटले तरी सवयीने जमू लागते आणि मग काही एक वेगळेच दृष्य दिसू लागते. “नक्की काय” हे कळू लागते. Facts and realities identify होऊ लागतात.
       </p>
 
-      <p class="marathi-body">
+      <p class="article-text">
         रोजच्या व्यवहारात आपल्या point of view व्यतिरिक्त असलेल्या इतर बाजू थोडया थोडया समजून घेता येऊ लागल्या की त्याचा कळत नकळत एक फायदा असा होऊ लागतो की समोर येणाऱ्या परिस्थितीस दिला जाणारा आपला प्रतिसाद आपसूक calibrated, fine tuned and most importantly, if required होतो. त्यामुळे अनावश्यक ताणतणाव निर्माण होणे टळते. आपण नकळत relative frame of mind मधून बाहेर पडून relative frame of reality मधे प्रवेश करतो. शब्दांत न मांडता येणारी अनुभूती येते.
       </p>
 
-      <p class="marathi-body">
+      <p class="article-text">
         या अफाट विश्वातील आकाशगंगा, ग्रह, तारे हे सर्व आपल्याला जसे दिसतात किंवा जाणवतात ते तसे का? हे समजून घेण्याचा प्रयत्न करताना विश्वविख्यात शास्त्रज्ञ डॉ अल्बर्ट आईन्स्टाईन यांनी मांडलेला ‘सापेक्षतावादाचा सिद्धांत’ (theory of relativity) समजायला तसा गहन असला तरी त्याचा निष्कर्ष आहे की “जे काही दिसते किंवा जाणवते ते तसे असतेच असे नाही. सर्व काही दृष्टीकोनसापेक्ष असते”. म्हणजे तर्काच्या कसोटीवर तावून सुलाखून घेतलेला वैज्ञानिक सिद्धान्त देखील शेवटी काही वेगळे सांगत नाही; आणि प्रत्येकच माणसाचे ‘मन’ डोळ्यांना दिसत नसले तरी बाह्य विश्वापेक्षा काही कमी अफाट नाहीये.
       </p>
 
-      <div class="pt-6 pb-8 text-center space-y-2">
-        <p class="font-medium text-stone-900 dark:text-stone-100">जे बाहेर आहे तेच आतही आहे.</p>
-        <p class="font-semibold text-stone-900 dark:text-stone-100">तेच ते आणि तेच ते!</p>
-        <p class="text-stone-600 dark:text-stone-400 pt-2 tracking-wide font-normal">~जयदीप | ५ सप्टेंबर २०२४</p>
+      <p class="text-center font-medium text-lg pt-4 text-stone-900 dark:text-stone-100">
+        जे बाहेर आहे तेच आतही आहे.
+      </p>
+
+      <p class="text-center font-semibold text-lg pb-2 text-stone-900 dark:text-stone-100">
+        तेच ते आणि तेच ते
+      </p>
+
+      <!-- Divider Symbol -->
+      <div class="text-center text-lg tracking-widest text-stone-400 dark:text-stone-500 py-2 select-none">
+        ⌘⌘⌘
       </div>
+
+      <!-- Date / Timestamp -->
+      <p class="text-center text-sm font-normal text-stone-500 dark:text-stone-400 tracking-wider">
+        २०२४०९०५
+      </p>
+
     </article>
+
+    <!-- Share Button Container -->
+    <div class="mt-14 mb-8 flex flex-col items-center justify-center">
+      <button id="shareBtn" class="group flex items-center gap-2.5 px-6 py-3 rounded-full bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 hover:bg-stone-800 dark:hover:bg-white shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 text-sm font-medium">
+        <svg class="w-4 h-4 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="18" cy="5" r="3"/>
+          <circle cx="6" cy="12" r="3"/>
+          <circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+        <span>शेअर करा</span>
+      </button>
+
+      <!-- Feedback Toast Notification -->
+      <div id="toast" class="mt-3 text-xs font-medium text-emerald-600 dark:text-emerald-400 opacity-0 transition-opacity duration-300 pointer-events-none">
+        लिंक कॉपी झाली!
+      </div>
+    </div>
+
   </main>
 
-  <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-stone-900/90 text-stone-50 dark:bg-stone-100 dark:text-stone-900 px-5 py-2.5 rounded-full text-sm font-medium shadow-xl opacity-0 pointer-events-none transition-all duration-300">
-    Link copied!
-  </div>
-
   <script>
-    // Theme toggle handling
-    const htmlEl = document.documentElement;
+    // Theme toggle logic (supporting auto system preference and user toggle)
+    const htmlElement = document.documentElement;
     const themeToggleBtn = document.getElementById('themeToggleBtn');
-    const sunIcon = document.getElementById('sunIcon');
-    const moonIcon = document.getElementById('moonIcon');
-
-    function updateThemeUI(isDark) {
-      if (isDark) {
-        htmlEl.classList.add('dark');
-        htmlEl.classList.remove('light');
-        sunIcon.classList.remove('hidden');
-        moonIcon.classList.add('hidden');
-      } else {
-        htmlEl.classList.remove('dark');
-        htmlEl.classList.add('light');
-        sunIcon.classList.add('hidden');
-        moonIcon.classList.remove('hidden');
-      }
+    
+    // Check initial stored preference or system preference
+    const storedTheme = localStorage.getItem('user-theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+      htmlElement.classList.add('dark');
+      htmlElement.classList.remove('light');
+    } else {
+      htmlElement.classList.remove('dark');
+      htmlElement.classList.add('light');
     }
 
-    // Initialize theme based on preference or system
-    const savedTheme = localStorage.getItem('app-theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialDark = savedTheme ? savedTheme === 'dark' : prefersDark;
-    updateThemeUI(initialDark);
-
-    themeToggleBtn.addEventListener('click', () => {
-      const isNowDark = !htmlEl.classList.contains('dark');
-      updateThemeUI(isNowDark);
-      localStorage.setItem('app-theme', isNowDark ? 'dark' : 'light');
+    themeToggleBtn.addEventListener('click', function() {
+      if (htmlElement.classList.contains('dark')) {
+        htmlElement.classList.remove('dark');
+        htmlElement.classList.add('light');
+        localStorage.setItem('user-theme', 'light');
+      } else {
+        htmlElement.classList.add('dark');
+        htmlElement.classList.remove('light');
+        localStorage.setItem('user-theme', 'dark');
+      }
     });
 
-    // Toast notification function
-    const toast = document.getElementById('toast');
-    let toastTimeout;
-    function showToast(msg) {
-      toast.textContent = msg;
-      toast.classList.remove('opacity-0', 'pointer-events-none');
-      toast.classList.add('opacity-100');
-      clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => {
-        toast.classList.remove('opacity-100');
-        toast.classList.add('opacity-0', 'pointer-events-none');
-      }, 2500);
-    }
-
-    // Share button handling
+    // Share functionality
     const shareBtn = document.getElementById('shareBtn');
-    shareBtn.addEventListener('click', async () => {
+    const toast = document.getElementById('toast');
+
+    shareBtn.addEventListener('click', function() {
       const shareData = {
         title: 'तेच ते आणि तेच ते',
-        text: 'तेच ते आणि तेच ते - विचारकोन आणि दृष्टीकोनसापेक्षता',
-        url: window.location.href,
+        text: 'तेच ते आणि तेच ते - एक चिंतनशील मराठी लेख',
+        url: window.location.href
       };
 
-      if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
-        try {
-          await navigator.share(shareData);
-        } catch (err) {
-          if (err.name !== 'AbortError') {
-            copyToClipboard();
-          }
-        }
+      if (navigator.share) {
+        navigator.share(shareData).catch(function(err) {
+          // Fallback if dismissed or failed
+          copyUrlFallback();
+        });
       } else {
-        copyToClipboard();
+        copyUrlFallback();
       }
     });
 
-    function copyToClipboard() {
-      const tempInput = document.createElement('input');
-      tempInput.value = window.location.href;
-      document.body.appendChild(tempInput);
-      tempInput.select();
+    function copyUrlFallback() {
       try {
+        const dummy = document.createElement('input');
+        document.body.appendChild(dummy);
+        dummy.value = window.location.href;
+        dummy.select();
         document.execCommand('copy');
-        showToast('Link copied to clipboard!');
+        document.body.removeChild(dummy);
+        showToast('लिंक कॉपी झाली!');
       } catch (e) {
-        showToast('Unable to copy link.');
+        showToast('शेअर करणे शक्य झाले नाही');
       }
-      document.body.removeChild(tempInput);
+    }
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.remove('opacity-0');
+      toast.classList.add('opacity-100');
+      setTimeout(function() {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0');
+      }, 2500);
     }
   </script>
 </body>
