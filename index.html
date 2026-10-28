@@ -49,7 +49,25 @@
       text-justify: inter-word;
       word-break: keep-all;
       overflow-wrap: break-word;
-      line-height: 1.95;
+      line-height: 1.9;
+      margin-bottom: 1.35rem;
+    }
+
+    .article-content p:not(.article-text) {
+      margin-bottom: 1.35rem;
+    }
+
+    .article-content > *:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Distinct accent color for key highlighted reflections */
+    .highlight-accent {
+      color: #9333ea; /* Deep violet in light mode */
+      transition: color 0.3s ease;
+    }
+    .dark .highlight-accent {
+      color: #c084fc; /* Radiant lavender in dark mode */
     }
 
     /* Keyframe animations for the SVG header graphic */
@@ -166,13 +184,13 @@
       </svg>
     </div>
 
-    <!-- Document Title -->
-    <h1 class="text-3xl sm:text-4xl font-bold text-center tracking-normal text-stone-900 dark:text-stone-50 mt-2 mb-10 leading-snug">
+    <!-- Document Title without bold formatting -->
+    <h1 class="text-3xl sm:text-4xl font-normal text-center tracking-normal text-stone-900 dark:text-stone-50 mt-2 mb-10 leading-snug">
       तेच ते आणि तेच ते
     </h1>
 
-    <!-- Article Content Container -->
-    <article class="space-y-6 text-[1.07rem] sm:text-[1.125rem] text-stone-800 dark:text-stone-200">
+    <!-- Article Content Container with exact mobile (1.175rem) and desktop (1.25rem) font sizes -->
+    <article class="article-content text-[1.175rem] md:text-[1.25rem] text-stone-800 dark:text-stone-200">
 
       <p class="article-text">
         आपल्या आजूबाजूस घडणाऱ्या घटना; संपर्कात येणाऱ्या व्यक्ती, मैत्र, आप्तस्वकीय, प्राणी, पक्षी आणि निर्जीव वस्तू यांच्या ‘वर्तणुकी’कडे आपण सहसा एकाच कोनातून म्हणजे ‘आपल्याच’ दृष्टीकोनातून बघत असतो. जगाकडे पाहण्याचा, त्याला समजून घेण्याचा हाच काय तो एकमेव मार्ग आहे ही आपली ठाम समजूत असते. झाल्या-गेल्या घटनांवर विचार आणि त्यांना आपण दिलेल्या प्रतिक्रिया व प्रतिसाद यांचा उगम देखील याच दृष्टीकोनातून होत असतो. अर्थातच त्यावर आपल्या अहंकाराचा पगडा असणे ओघाने आलेच. त्यामुळे मानापमान, समज-गैरसमज, विश्वास-अविश्वास निर्माण होत असतात, मानसिक अस्वास्थ्य निर्माण करत असतात. आणि हा अहंकारच आपला दृष्टिकोन अधिकाधिक घट्ट करत असतो.
@@ -187,17 +205,17 @@
       </p>
 
       <!-- Divider Symbol -->
-      <div class="text-center text-lg tracking-widest text-stone-400 dark:text-stone-500 py-3 select-none">
+      <div class="text-center text-lg tracking-widest text-stone-400 dark:text-stone-500 py-1 mb-[1.35rem] select-none">
         ⌘⌘⌘
       </div>
 
       <!-- Centered Reflection Question -->
-      <p class="text-center font-medium text-lg sm:text-xl text-stone-900 dark:text-stone-100 py-2">
+      <p class="text-center font-normal highlight-accent">
         काय करायचे मग या ‘त्याच त्या’ चक्रातून बाहेर पडायला?
       </p>
 
       <!-- Divider Symbol -->
-      <div class="text-center text-lg tracking-widest text-stone-400 dark:text-stone-500 py-3 select-none">
+      <div class="text-center text-lg tracking-widest text-stone-400 dark:text-stone-500 py-1 mb-[1.35rem] select-none">
         ⌘⌘⌘
       </div>
 
@@ -217,16 +235,16 @@
         या अफाट विश्वातील आकाशगंगा, ग्रह, तारे हे सर्व आपल्याला जसे दिसतात किंवा जाणवतात ते तसे का? हे समजून घेण्याचा प्रयत्न करताना विश्वविख्यात शास्त्रज्ञ डॉ अल्बर्ट आईन्स्टाईन यांनी मांडलेला ‘सापेक्षतावादाचा सिद्धांत’ (theory of relativity) समजायला तसा गहन असला तरी त्याचा निष्कर्ष आहे की “जे काही दिसते किंवा जाणवते ते तसे असतेच असे नाही. सर्व काही दृष्टीकोनसापेक्ष असते”. म्हणजे तर्काच्या कसोटीवर तावून सुलाखून घेतलेला वैज्ञानिक सिद्धान्त देखील शेवटी काही वेगळे सांगत नाही; आणि प्रत्येकच माणसाचे ‘मन’ डोळ्यांना दिसत नसले तरी बाह्य विश्वापेक्षा काही कमी अफाट नाहीये.
       </p>
 
-      <p class="text-center font-medium text-lg pt-4 text-stone-900 dark:text-stone-100">
+      <p class="text-center font-normal pt-2 highlight-accent">
         जे बाहेर आहे तेच आतही आहे.
       </p>
 
-      <p class="text-center font-semibold text-lg pb-2 text-stone-900 dark:text-stone-100">
+      <p class="text-center font-normal highlight-accent">
         तेच ते आणि तेच ते
       </p>
 
       <!-- Divider Symbol -->
-      <div class="text-center text-lg tracking-widest text-stone-400 dark:text-stone-500 py-2 select-none">
+      <div class="text-center text-lg tracking-widest text-stone-400 dark:text-stone-500 py-1 mb-[1.35rem] select-none">
         ⌘⌘⌘
       </div>
 
